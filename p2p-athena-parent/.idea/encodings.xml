@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-biz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-dal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-deploy" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-facade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/p2p-athena-facade-ref" charset="UTF-8" />
+  </component>
+</project>
