@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 
     <!-- alibaba 数据库连接池 -->
@@ -53,13 +55,13 @@
 
         <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
         <property name="filters" value="config,stat"/>
-        <property name="connectionProperties" value="config.decrypt=true"/>
+        <!--<property name="connectionProperties" value="config.decrypt=true"/>-->
     </bean>
 
 
     <bean id="dataSource" class="com.p6spy.engine.spy.P6DataSource">
         <constructor-arg>
-            <ref local="dataSourceTarget"/>
+            <ref bean="dataSourceTarget"/>
         </constructor-arg>
     </bean>
 

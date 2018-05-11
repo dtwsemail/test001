@@ -6,7 +6,8 @@ package com.hsjry.p2p.athena.common.constants;
 public enum EnumBizType {
 
     TEST("999","测试"),
-    OPEAN_ACCOUNT_FOR_COMPANY("001","对公开户");
+    SINGN_IN("001","商户签到"),
+    OPEAN_ACCOUNT_FOR_COMPANY("002","对公开户");
 
     private String code;
     /**

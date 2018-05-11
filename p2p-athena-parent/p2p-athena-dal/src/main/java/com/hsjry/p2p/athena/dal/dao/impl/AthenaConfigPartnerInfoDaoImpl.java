@@ -5,6 +5,7 @@ import com.hsjry.p2p.athena.dal.dao.AthenaConfigPartnerInfoDao;
 import com.hsjry.p2p.athena.dal.dao.model.AthenaConfigPartnerInfo;
 import com.hsjry.p2p.athena.dal.dao.model.AthenaConfigPartnerInfoExample;
 import com.hsjry.p2p.athena.dal.dao.service.AthenaConfigPartnerInfoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Repository
 public class AthenaConfigPartnerInfoDaoImpl implements AthenaConfigPartnerInfoDao {
+    @Autowired
     private AthenaConfigPartnerInfoMapper athenaConfigPartnerInfoMapper;
 
     @Override

@@ -16,6 +16,12 @@
 
         <dependency>
             <groupId>hsjry.p2p</groupId>
+            <artifactId>p2p-athena-facade</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hsjry.p2p</groupId>
             <artifactId>p2p-athena-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -27,6 +33,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -51,6 +61,11 @@
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
         </dependency>
     </dependencies>
 

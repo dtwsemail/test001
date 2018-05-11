@@ -24,8 +24,8 @@ public enum  EnumCustodianType {
         this.description = description;
     }
 
-    public static EnumBizType find(String code) {
-        for (EnumBizType frs : EnumBizType.values()) {
+    public static EnumCustodianType find(String code) {
+        for (EnumCustodianType frs : EnumCustodianType.values()) {
             if (frs.getCode().equals(code)) {
                 return frs;
             }

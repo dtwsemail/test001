@@ -951,6 +951,76 @@ public class AthenaConfigPartnerInfoExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andCustodianTypeIsNull() {
+            addCriterion("custodian_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeIsNotNull() {
+            addCriterion("custodian_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeEqualTo(String value) {
+            addCriterion("custodian_type =", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeNotEqualTo(String value) {
+            addCriterion("custodian_type <>", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeGreaterThan(String value) {
+            addCriterion("custodian_type >", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("custodian_type >=", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeLessThan(String value) {
+            addCriterion("custodian_type <", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeLessThanOrEqualTo(String value) {
+            addCriterion("custodian_type <=", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeLike(String value) {
+            addCriterion("custodian_type like", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeNotLike(String value) {
+            addCriterion("custodian_type not like", value, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeIn(List<String> values) {
+            addCriterion("custodian_type in", values, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeNotIn(List<String> values) {
+            addCriterion("custodian_type not in", values, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeBetween(String value1, String value2) {
+            addCriterion("custodian_type between", value1, value2, "custodianType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustodianTypeNotBetween(String value1, String value2) {
+            addCriterion("custodian_type not between", value1, value2, "custodianType");
+            return (Criteria) this;
+        }
     }
 
     /**
