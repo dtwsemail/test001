@@ -14,7 +14,7 @@ public enum EnumErrorCode {
 	
     SUCCESS("000000","处理成功"),
     PARAMETER_ERROR("000001","参数校验不正确"),
-
+    CONFIG_ERROR("000002","系统配置不正确"),
     /** 通用错误 */
     SYSTEM_ERROR("999999","系统异常"),
     /** 调用外部服务异常 */

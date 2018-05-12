@@ -3,12 +3,10 @@ package com.hsjry.p2p.athena.common.utils;
 
 import com.hsjry.p2p.athena.common.constants.EnumErrorCode;
 import exception.BaseException;
+import exception.TimeoutException;
 
 public class PreconditionUtils {
 
-    public static void checkNotNull(Object obj, String errorMsg, EnumErrorCode errorCode) {
-        checkNotNull(null, errorMsg, errorCode);
-    }
 
     public static void checkNotNull(String tenantId, Object obj,
                                     String errorMsg, EnumErrorCode errorCode) {
@@ -27,6 +25,10 @@ public class PreconditionUtils {
 
     public static void throwException(String tenantId, String errorMsg, EnumErrorCode errorCode) {
         doCheck(tenantId, false, errorMsg, errorCode);
+    }
+
+    public static void throwTimeoutException(String tenantId, String errorMsg) {
+        throw new TimeoutException(errorMsg, EnumErrorCode.TIMEOUT_ERROR.getErrorCode(), tenantId);
     }
 
     private static void doCheck(String tenantId, boolean expression,

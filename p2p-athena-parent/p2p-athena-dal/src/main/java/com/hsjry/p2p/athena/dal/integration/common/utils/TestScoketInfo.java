@@ -1,5 +1,8 @@
 package com.hsjry.p2p.athena.dal.integration.common.utils;
 
+import com.alibaba.fastjson.JSONObject;
+import com.hsjry.p2p.athena.dal.integration.mtbank.protocol.socket.response.ServantSignRes;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -30,29 +33,30 @@ public class TestScoketInfo {
         sb.append(servant_code);
         sb.append("54901");
         sb.append("000");
-        sb.append(toFixedLengthWithZero("0",32));
+        sb.append(toFixedLengthWithZero("0", 32));
         sb.append(body);
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         String xml = "<?xml version=\"1.0\" encoding=\"GB2312\"?>" +
                 "<MsgText><MsgHdr><Ver>1.0</Ver><SysType>5</SysType><InstrCd>54901</InstrCd><TradSrc>0</TradSrc><SvInst><InstType>0</InstType><InstId>20170001</InstId><InstNm>国家粮食局粮食交易协调中心</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></SvInst><BkInst><InstType>1</InstType><InstId>j</InstId><InstNm>农发行</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></BkInst><Date>20160921</Date><Time>080000</Time><RqRef><Ref>20160921080000006887</Ref><IssrType></IssrType><RefIssr></RefIssr></RqRef><LstFrag></LstFrag></MsgHdr><Dgst></Dgst></MsgText>";
         try {
             System.out.println(xml.getBytes("utf-8").length);
-            xml = new String(xml.getBytes(),"gbk");
+            xml = new String(xml.getBytes(), "gbk");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         System.out.println(xml.length());
-        System.out.println(xml.codePointCount(0,xml.length()));
+        System.out.println(xml.codePointCount(0, xml.length()));
     }
-    public static void main2(String[] args) throws UnsupportedEncodingException {
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
         String xml = "<?xml version=\"1.0\" encoding=\"GB2312\"?>" +
                 "<MsgText><MsgHdr><Ver>1.0</Ver><SysType>5</SysType><InstrCd>54901</InstrCd><TradSrc>0</TradSrc><SvInst><InstType>0</InstType><InstId>20170001</InstId><InstNm>国家粮食局粮食交易协调中心</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></SvInst><BkInst><InstType>1</InstType><InstId>j</InstId><InstNm>农发行</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></BkInst><Date>20160921</Date><Time>080000</Time><RqRef><Ref>20160921080000006887</Ref><IssrType></IssrType><RefIssr></RefIssr></RqRef><LstFrag></LstFrag></MsgHdr><Dgst></Dgst></MsgText>";
 
         String s = getInfo(xml);
-        System.out.println("请求："+s);
+        System.out.println("请求：" + s);
         HsSocketClient client = new HsSocketClient();
         try {
             client.setAddress("192.168.46.212");
@@ -64,14 +68,17 @@ public class TestScoketInfo {
             System.out.println("begin receive =====");
             byte[] bytes = client.recv();
             System.out.println("*****");
-            System.out.println(new String(bytes,"GB2312"));
+            String r = new String(bytes, "GB2312");
+            JSONObject o = XmlParser.xml2Json(r);
+            System.out.println(o.toJavaObject(ServantSignRes.class));
+
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if(client!=null)
-                      client.close();
+                if (client != null)
+                    client.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,7 +87,7 @@ public class TestScoketInfo {
 
     }
 
-    public String getMac(){
+    public String getMac() {
         String address = null;
         try {
             String command = "cmd.exe /c ipconfig /all";

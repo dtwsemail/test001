@@ -1,8 +1,9 @@
 package com.hsjry.p2p.athena.dal.dao.service;
 
+import java.util.List;
+
 import com.hsjry.p2p.athena.dal.dao.model.AthenaConfigPartnerInfo;
 import com.hsjry.p2p.athena.dal.dao.model.AthenaConfigPartnerInfoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface AthenaConfigPartnerInfoMapper {

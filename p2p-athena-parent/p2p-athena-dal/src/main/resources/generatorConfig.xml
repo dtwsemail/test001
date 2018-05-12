@@ -9,8 +9,8 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.93.226.99:3306/omegaDB"
-                        userId="omega" password="82790086">
+                        connectionURL="jdbc:mysql://118.24.77.141:3306/omegaDB"
+                        userId="root" password="82790086">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -34,6 +34,7 @@
         <!--<table tableName="athena_biz_serial"></table>-->
         <!--<table tableName="athena_biz_serial_ext"></table>-->
         <table tableName="athena_config_partner_info"></table>
+        <!--<table tableName="athena_rpc_log"></table>-->
 
     </context>
 
