@@ -49,7 +49,7 @@ public class HsSocketClient extends HsSocketClientImpl {
 
 				byte[] pkgBody = new byte[currLen];
 				System.arraycopy (bt, i * packLength, pkgBody, 0, currLen);
-				LOGGER.info (new String (pkgBody));
+				LOGGER.info (new String (pkgBody,"gbk"));
 				dout.write (pkgBody);
 				i++;
 			}

@@ -4,22 +4,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjry.p2p.athena.common.log.Log;
 import com.hsjry.p2p.athena.dal.integration.common.utils.HsSocketClient;
 import com.hsjry.p2p.athena.dal.integration.common.utils.XmlParser;
-import com.hsjry.p2p.athena.dal.integration.mtbank.protocol.socket.request.component.XmlRequestBean;
 import com.hsjry.p2p.athena.dal.integration.mtbank.protocol.socket.response.MTBaseRes;
 import com.hsjry.p2p.athena.dal.integration.mtbank.utils.MTUtils;
 import com.hsjry.p2p.athena.dal.integration.service.ServiceProtocol;
 import org.springframework.stereotype.Service;
-
-import java.io.UnsupportedEncodingException;
 
 
 /**
  * Created by wangyf14377 on 2018/4/14.
  */
 @Service
-public class MTSocketServiceImpl<REQUEST extends String, RESPONSE extends MTBaseRes> implements ServiceProtocol<REQUEST, RESPONSE> {
+public class MTSocketServiceProtocolImpl<REQUEST extends String, RESPONSE extends MTBaseRes> implements ServiceProtocol<REQUEST, RESPONSE> {
 
-    private final static Log log = Log.get(MTSocketServiceImpl.class);
+    private final static Log log = Log.get(MTSocketServiceProtocolImpl.class);
 
     private String ipAddress = "192.168.46.212";
     private int port = 8816;

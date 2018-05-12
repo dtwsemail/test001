@@ -26,4 +26,10 @@ public class MTBaseRes {
     public void setRst(ReturnCode rst) {
         Rst = rst;
     }
+
+
+
+
+
+
 }

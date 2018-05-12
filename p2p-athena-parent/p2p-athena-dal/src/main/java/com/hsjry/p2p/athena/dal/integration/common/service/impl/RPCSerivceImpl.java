@@ -35,42 +35,45 @@ public class RPCSerivceImpl implements RPCService {
     private SerialNoService serialNoService;
 
     @Override
-    public <REQUEST,RESPONSE> RESPONSE doService(String partnerId, String bizSerialNo, EnumBizType bizType, REQUEST request, ServiceProtocol<REQUEST, RESPONSE> protocol, Class returnClazz) {
-        return this.doService(partnerId, bizSerialNo, bizType,request, protocol, returnClazz,true);
+    public <REQUEST, RESPONSE> RESPONSE doService(String partnerId, String bizSerialNo, EnumBizType bizType, REQUEST request, ServiceProtocol<REQUEST, RESPONSE> protocol, Class returnClazz) {
+        return this.doService(partnerId, bizSerialNo, bizType, request, protocol, returnClazz, true);
     }
 
     @Override
-    public  <REQUEST,RESPONSE> RESPONSE doService(String partnerId, String bizSerialNo, EnumBizType bizType,REQUEST request, ServiceProtocol<REQUEST,RESPONSE> protocol, Class returnClazz,boolean isRecord) {
+    public <REQUEST, RESPONSE> RESPONSE doService(String partnerId, String bizSerialNo, EnumBizType bizType, REQUEST request, ServiceProtocol<REQUEST, RESPONSE> protocol, Class returnClazz, boolean isRecord) {
         long startTime = System.nanoTime();
         try {
             //远程调用
             String result = protocol.doService(request);
             long endTime = System.nanoTime();
-            RESPONSE response =  protocol.getResult(result,returnClazz);
+            RESPONSE response = (RESPONSE) protocol.getResult(result, returnClazz);
             boolean isSuccess = protocol.checkIsSuccess(response);
-            recordRpcLog(partnerId,bizSerialNo,bizType,request,result, isSuccess? EnumRPCStatus.SUCCESS:EnumRPCStatus.FAIL,endTime-startTime);
-        } catch (SocketTimeoutException oe){
-            log.error(oe,"处理超时");
+            recordRpcLog(partnerId, bizSerialNo, bizType, request, result, isSuccess ? EnumRPCStatus.SUCCESS : EnumRPCStatus.FAIL, endTime - startTime);
+            return response;
+        } catch (SocketTimeoutException oe) {
+            log.error(oe, "处理超时");
             long exceptionTime = System.nanoTime();
-            recordRpcLog(partnerId,bizSerialNo,bizType,request,null ,EnumRPCStatus.TIMEOUT,exceptionTime-startTime);
+            recordRpcLog(partnerId, bizSerialNo, bizType, request, null, EnumRPCStatus.TIMEOUT, exceptionTime - startTime);
             PreconditionUtils.throwTimeoutException(partnerId, "调用外部系统接口超时");
-        } catch(Exception e) {
-            log.error(e,"处理失败");
+        } catch (Exception e) {
+            log.error(e, "处理失败");
             long exceptionTime = System.nanoTime();
-            recordRpcLog(partnerId,bizSerialNo,bizType,request,e.getMessage(),EnumRPCStatus.FAIL,exceptionTime-startTime);
-            PreconditionUtils.throwException(partnerId,"调用外部系统报错",EnumErrorCode.SERVER_ERROR);
+            recordRpcLog(partnerId, bizSerialNo, bizType, request, e.getMessage(), EnumRPCStatus.FAIL, exceptionTime - startTime);
+            PreconditionUtils.throwException(partnerId, "调用外部系统报错", EnumErrorCode.SERVER_ERROR);
         }
         return null;
     }
 
-    private <REQUEST,RESPONSE> void recordRpcLog(String partnerId, String bizSerialNo, EnumBizType bizType, REQUEST request, String response, EnumRPCStatus status, long dealTime) {
+    private <REQUEST, RESPONSE> void recordRpcLog(String partnerId, String bizSerialNo, EnumBizType bizType, REQUEST request, String response, EnumRPCStatus status, long dealTime) {
         try {
             AthenaRpcLog log = new AthenaRpcLog();
             log.setId(serialNoService.generateCommonSerivce());
             log.setPartnerId(partnerId);
             log.setPartnerSerialNo(bizSerialNo);
             log.setRequest(JsonUtils.toJSONString(request));
-            log.setResponse(response.length()> MAX_RESPONSE_SIZE ?  response.substring(0,MAX_RESPONSE_SIZE): response);
+            if(response!=null){
+                log.setResponse(response.length() > MAX_RESPONSE_SIZE ? response.substring(0, MAX_RESPONSE_SIZE) : response);
+            }
             log.setDealTime(dealTime);
             if (bizType == null) {
                 log.setBizType(bizType.getCode());

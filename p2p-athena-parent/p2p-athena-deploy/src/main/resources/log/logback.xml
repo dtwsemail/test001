@@ -110,7 +110,7 @@
     </root>
 
     <logger name="org.apache" level="WARN" />
-    <logger name="org.springframework" level="WARN" />
+    <logger name="org.springframework" level="trace" />
     <logger name="org.quartz" level="WARN" />
     <logger name="com.opensymphony" level="ERROR" />
     <logger name="java.sql.Connection" level="DEBUG" />

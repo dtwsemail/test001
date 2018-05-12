@@ -24,12 +24,13 @@ public class TestScoketInfo {
 
     }
 
-    public static String getInfo(String body) {
+    public static String getInfo(String body) throws UnsupportedEncodingException {
         StringBuffer sb = new StringBuffer();
         sb.append("X");
         sb.append("057");
-//        sb.append(toFixedLengthWithZero(body.length()+"", 5));
-        sb.append("00658");
+        int bodyLength = body.getBytes("gbk").length;
+        sb.append(toFixedLengthWithZero(bodyLength +"", 5));
+//        sb.append("00658");
         sb.append(servant_code);
         sb.append("54901");
         sb.append("000");
@@ -42,11 +43,13 @@ public class TestScoketInfo {
         String xml = "<?xml version=\"1.0\" encoding=\"GB2312\"?>" +
                 "<MsgText><MsgHdr><Ver>1.0</Ver><SysType>5</SysType><InstrCd>54901</InstrCd><TradSrc>0</TradSrc><SvInst><InstType>0</InstType><InstId>20170001</InstId><InstNm>国家粮食局粮食交易协调中心</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></SvInst><BkInst><InstType>1</InstType><InstId>j</InstId><InstNm>农发行</InstNm><BrchId></BrchId><BrchNm></BrchNm><SubBrchId></SubBrchId><SubBrchNm></SubBrchNm></BkInst><Date>20160921</Date><Time>080000</Time><RqRef><Ref>20160921080000006887</Ref><IssrType></IssrType><RefIssr></RefIssr></RqRef><LstFrag></LstFrag></MsgHdr><Dgst></Dgst></MsgText>";
         try {
-            System.out.println(xml.getBytes("utf-8").length);
-            xml = new String(xml.getBytes(), "gbk");
+            System.out.println(xml.getBytes("gbk").length);
+            xml = new String(xml.getBytes("utf-8"), "utf-8");
+            System.out.println(new String(xml.getBytes("gbk"),"gbk"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        System.out.println(xml);
         System.out.println(xml.length());
         System.out.println(xml.codePointCount(0, xml.length()));
     }
@@ -64,13 +67,14 @@ public class TestScoketInfo {
             client.init();
             client.connect();
             System.out.println("begin send=======");
-            client.send(s.getBytes("GBK"));
+            client.send(s.getBytes("gbk"));
             System.out.println("begin receive =====");
             byte[] bytes = client.recv();
             System.out.println("*****");
             String r = new String(bytes, "GB2312");
             JSONObject o = XmlParser.xml2Json(r);
             System.out.println(o.toJavaObject(ServantSignRes.class));
+
 
 
         } catch (Exception e) {
